@@ -1,0 +1,7 @@
+{
+  "name": "Serviceberg with admin ",
+  "description": "A premium, dark-themed service discovery platform featuring tactile interactions, cinematic bento layouts, and fluid typography.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
