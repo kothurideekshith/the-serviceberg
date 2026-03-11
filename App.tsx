@@ -12,6 +12,7 @@ import { ProviderView } from './components/Views/ProviderView';
 const JobApplicationView = lazy(() => import('./components/JobApplicationView').then(m => ({ default: m.JobApplicationView })));
 const AdminPanel = lazy(() => import('./components/AdminPanel').then(m => ({ default: m.AdminPanel })));
 const ProviderDashboard = lazy(() => import('./components/ProviderDashboard').then(m => ({ default: m.ProviderDashboard })));
+const AuthView = lazy(() => import('./components/AuthView').then(m => ({ default: m.AuthView })));
 import { CATEGORY_MAP } from './constants';
 import { Service, DrawerState, CategoryData } from './types';
 import { Zap } from 'lucide-react';
@@ -25,9 +26,10 @@ const App: React.FC = () => {
   const [detailService, setDetailService] = useState<Service | null>(null);
   const [basket, setBasket] = useState<Service[]>([]);
   const [navigation, setNavigation] = useState<{
-    view: 'home' | 'category' | 'provider' | 'jobs' | 'admin' | 'provider-dashboard';
+    view: 'home' | 'category' | 'provider' | 'jobs' | 'admin' | 'provider-dashboard' | 'auth';
     selectedCategoryId: string | null;
     selectedProviderId: string | null;
+    authMode?: 'login' | 'signup' | 'partner';
   }>({ view: 'home', selectedCategoryId: null, selectedProviderId: null });
 
   const [appData, setAppData] = useState<Record<string, CategoryData>>(CATEGORY_MAP);
@@ -150,9 +152,9 @@ const App: React.FC = () => {
     }
   };
 
-  const navigateTo = (view: 'home' | 'category' | 'provider' | 'jobs' | 'admin' | 'provider-dashboard', categoryId: string | null = null, providerId: string | null = null) => {
+  const navigateTo = (view: 'home' | 'category' | 'provider' | 'jobs' | 'admin' | 'provider-dashboard' | 'auth', categoryId: string | null = null, providerId: string | null = null, authMode?: 'login' | 'signup' | 'partner') => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setNavigation({ view, selectedCategoryId: categoryId, selectedProviderId: providerId });
+    setNavigation({ view, selectedCategoryId: categoryId, selectedProviderId: providerId, authMode });
   };
 
   const addToBasket = (service: Service) => {
@@ -245,6 +247,16 @@ const App: React.FC = () => {
       {navigation.view === 'jobs' && (
         <Suspense fallback={<div className="min-h-screen bg-white flex items-center justify-center"><div className="h-12 w-12 border-4 border-ink border-t-transparent rounded-full animate-spin" /></div>}>
           <JobApplicationView onBack={() => navigateTo('home')} />
+        </Suspense>
+      )}
+
+      {navigation.view === 'auth' && (
+        <Suspense fallback={<div className="min-h-screen bg-white flex items-center justify-center"><div className="h-12 w-12 border-4 border-ink border-t-transparent rounded-full animate-spin" /></div>}>
+          <AuthView 
+            initialMode={navigation.authMode || 'login'} 
+            onBack={() => navigateTo('home')} 
+            onSuccess={() => navigateTo('home')} 
+          />
         </Suspense>
       )}
 

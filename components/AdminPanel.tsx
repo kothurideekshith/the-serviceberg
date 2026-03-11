@@ -107,7 +107,7 @@ const ImageInput: React.FC<{
 };
 
 export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, areas, onUpdateAreas, onViewDashboard, onClose }) => {
-  const [activeTab, setActiveTab] = useState<'overview' | 'categories'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'categories'>('categories');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isAddingCategory, setIsAddingCategory] = useState(false);
@@ -282,13 +282,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
           
           <nav className="flex-1 p-4 space-y-1">
             <button 
-              onClick={() => setActiveTab('overview')}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${activeTab === 'overview' ? 'bg-ink text-white shadow-lg shadow-black/10' : 'text-ink/50 hover:bg-smoke hover:text-ink'}`}
-            >
-              <LayoutDashboard size={18} />
-              Overview
-            </button>
-            <button 
               onClick={() => {
                 setActiveTab('categories');
                 setSelectedCategory(null);
@@ -297,6 +290,13 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
             >
               <LayoutDashboard size={18} />
               Categories
+            </button>
+            <button 
+              onClick={() => setActiveTab('overview')}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${activeTab === 'overview' ? 'bg-ink text-white shadow-lg shadow-black/10' : 'text-ink/50 hover:bg-smoke hover:text-ink'}`}
+            >
+              <LayoutDashboard size={18} />
+              Overview
             </button>
           </nav>
 
@@ -638,19 +638,19 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
             <header className="px-10 py-8 border-bottom border-smoke flex items-center justify-between shrink-0">
               <div className="flex flex-col gap-4">
                 <div>
-                  <h2 className="text-2xl font-normal tracking-tight">Edit Profile</h2>
+                  <h2 className="text-2xl font-bold tracking-tight">Edit Profile</h2>
                   <p className="text-sm font-medium text-ink/40">Modifying {editingProvider.provider.name}</p>
                 </div>
                 <div className="flex items-center gap-1 p-1 bg-pearl rounded-2xl w-fit">
                   <button 
                     onClick={() => setProviderEditTab('menu')}
-                    className={`px-6 py-2 rounded-xl text-xs font-normal transition-all ${providerEditTab === 'menu' ? 'bg-white text-ink shadow-sm' : 'text-ink/40 hover:text-ink'}`}
+                    className={`px-6 py-2 rounded-xl text-xs font-bold transition-all ${providerEditTab === 'menu' ? 'bg-black text-white shadow-sm' : 'text-ink/40 hover:text-ink'}`}
                   >
                     Menu
                   </button>
                   <button 
                     onClick={() => setProviderEditTab('settings')}
-                    className={`px-6 py-2 rounded-xl text-xs font-normal transition-all ${providerEditTab === 'settings' ? 'bg-white text-ink shadow-sm' : 'text-ink/40 hover:text-ink'}`}
+                    className={`px-6 py-2 rounded-xl text-xs font-bold transition-all ${providerEditTab === 'settings' ? 'bg-black text-white shadow-sm' : 'text-ink/40 hover:text-ink'}`}
                   >
                     Settings
                   </button>
@@ -701,7 +701,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                     <section className="space-y-6">
                       <div className="grid grid-cols-1 gap-8">
                         <div className="space-y-4">
-                          <label className="text-[11px] font-normal text-ink/40 ml-1">Profile Display (16:9)</label>
+                          <label className="text-[11px] font-bold text-black ml-1">Profile Display (16:9)</label>
                           <div className="aspect-[16/9] w-full rounded-[32px] overflow-hidden border border-smoke bg-pearl relative group">
                             <img 
                               src={editingProvider.provider.coverImage || editingProvider.provider.image} 
@@ -725,7 +725,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                     {/* Status Toggle */}
                     <section className="bg-pearl/50 p-6 rounded-3xl border border-smoke flex items-center justify-between">
                       <div>
-                        <h3 className="text-sm font-normal">Profile Status</h3>
+                        <h3 className="text-sm font-bold text-black">Profile Status</h3>
                         <p className="text-xs text-ink/40">Toggle to show as "Coming Soon" and dim on main profile</p>
                       </div>
                       <button 
@@ -739,7 +739,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                     {/* Basic Info */}
                     <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div className="space-y-2">
-                        <label className="text-[11px] font-normal text-ink/40 ml-1">Provider Name</label>
+                        <label className="text-[11px] font-bold text-black ml-1">Provider Name</label>
                         <input 
                           type="text" 
                           value={editingProvider.provider.name}
@@ -748,7 +748,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[11px] font-normal text-ink/40 ml-1">Location</label>
+                        <label className="text-[11px] font-bold text-black ml-1">Location</label>
                         <input 
                           type="text" 
                           value={editingProvider.provider.location}
@@ -757,7 +757,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                         />
                       </div>
                       <div className="md:col-span-2 space-y-2">
-                        <label className="text-[11px] font-normal text-ink/40 ml-1">Description</label>
+                        <label className="text-[11px] font-bold text-black ml-1">Description</label>
                         <textarea 
                           rows={3}
                           value={editingProvider.provider.description}
@@ -769,10 +769,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
 
                     {/* Contact & Links */}
                     <section className="space-y-6">
-                      <h3 className="text-sm font-normal text-ink/40 border-bottom border-smoke pb-4">Contact & Links</h3>
+                      <h3 className="text-sm font-bold text-black border-bottom border-smoke pb-4">Contact & Links</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                          <label className="text-[11px] font-normal text-ink/40 ml-1 flex items-center gap-2">
+                          <label className="text-[11px] font-bold text-black ml-1 flex items-center gap-2">
                             <Phone size={12} /> Phone Number
                           </label>
                           <input 
@@ -784,7 +784,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                           />
                         </div>
                         <div className="space-y-2">
-                          <label className="text-[11px] font-normal text-ink/40 ml-1 flex items-center gap-2">
+                          <label className="text-[11px] font-bold text-black ml-1 flex items-center gap-2">
                             <MessageCircle size={12} /> WhatsApp Number
                           </label>
                           <input 
@@ -796,7 +796,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                           />
                         </div>
                         <div className="space-y-2">
-                          <label className="text-[11px] font-normal text-ink/40 ml-1 flex items-center gap-2">
+                          <label className="text-[11px] font-bold text-black ml-1 flex items-center gap-2">
                             <CreditCard size={12} /> Payment URL
                           </label>
                           <input 
@@ -808,7 +808,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                           />
                         </div>
                         <div className="space-y-2">
-                          <label className="text-[11px] font-normal text-ink/40 ml-1 flex items-center gap-2">
+                          <label className="text-[11px] font-bold text-black ml-1 flex items-center gap-2">
                             <Globe size={12} /> Website URL
                           </label>
                           <input 
@@ -823,7 +823,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
 
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="space-y-2">
-                          <label className="text-[11px] font-normal text-ink/40 ml-1 flex items-center gap-2">
+                          <label className="text-[11px] font-bold text-black ml-1 flex items-center gap-2">
                             <Instagram size={12} /> Instagram
                           </label>
                           <input 
@@ -835,7 +835,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                           />
                         </div>
                         <div className="space-y-2">
-                          <label className="text-[11px] font-normal text-ink/40 ml-1 flex items-center gap-2">
+                          <label className="text-[11px] font-bold text-black ml-1 flex items-center gap-2">
                             <Twitter size={12} /> Twitter
                           </label>
                           <input 
@@ -847,7 +847,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                           />
                         </div>
                         <div className="space-y-2">
-                          <label className="text-[11px] font-normal text-ink/40 ml-1 flex items-center gap-2">
+                          <label className="text-[11px] font-bold text-black ml-1 flex items-center gap-2">
                             <Facebook size={12} /> Facebook
                           </label>
                           <input 
@@ -863,7 +863,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
 
                     {/* Geolocation */}
                     <section className="space-y-6">
-                      <h3 className="text-sm font-normal text-ink/40 border-bottom border-smoke pb-4">Geolocation</h3>
+                      <h3 className="text-sm font-bold text-black border-bottom border-smoke pb-4">Geolocation</h3>
                       <div className="bg-pearl rounded-2xl p-6 border border-smoke">
                         <div className="flex items-center justify-between mb-6">
                           <div className="flex items-center gap-3">
@@ -871,7 +871,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                               <Navigation size={20} />
                             </div>
                             <div>
-                              <h4 className="text-sm font-normal">Precise Coordinates</h4>
+                              <h4 className="text-sm font-bold text-black">Precise Coordinates</h4>
                               <p className="text-[10px] font-normal text-ink/40">Used for directions and maps</p>
                             </div>
                           </div>
@@ -916,7 +916,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                           <div className="space-y-2">
-                            <label className="text-[10px] font-normal text-ink/20 ml-1">Latitude</label>
+                            <label className="text-[10px] font-bold text-black ml-1">Latitude</label>
                             <input 
                               type="number" 
                               step="any"
@@ -926,7 +926,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                             />
                           </div>
                           <div className="space-y-2">
-                            <label className="text-[10px] font-normal text-ink/20 ml-1">Longitude</label>
+                            <label className="text-[10px] font-bold text-black ml-1">Longitude</label>
                             <input 
                               type="number" 
                               step="any"
@@ -942,7 +942,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                     {/* Stats */}
                     <section className="grid grid-cols-2 md:grid-cols-4 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[11px] font-normal text-ink/40 ml-1">Rating</label>
+                        <label className="text-[11px] font-bold text-black ml-1">Rating</label>
                         <input 
                           type="number" 
                           step="0.1"
@@ -954,7 +954,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[11px] font-normal text-ink/40 ml-1">Reviews</label>
+                        <label className="text-[11px] font-bold text-black ml-1">Reviews</label>
                         <input 
                           type="text" 
                           value={editingProvider.provider.reviews}
@@ -968,7 +968,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ data, onUpdateData, area
                   /* Grouped Services Menu (Customer View Style) */
                   <section className="space-y-8">
                     <div className="flex items-center justify-between border-bottom border-smoke pb-4">
-                      <h3 className="text-sm font-normal text-ink/40">Services Menu</h3>
+                      <h3 className="text-xl font-bold text-black">Services Menu</h3>
                     </div>
 
                     {/* Sub-category Menu */}

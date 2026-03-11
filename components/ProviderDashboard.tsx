@@ -324,10 +324,10 @@ export const ProviderDashboard: React.FC<ProviderDashboardProps> = ({ provider, 
           <div className="flex items-center justify-between mb-12">
             {!isCollapsed && (
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 bg-ink rounded-xl flex items-center justify-center text-white">
-                  <ShoppingBag size={20} />
+                <div className="h-10 w-10 bg-black rounded-xl flex items-center justify-center text-white shadow-lg shadow-black/20">
+                  <LayoutDashboard size={20} />
                 </div>
-                <span className="text-xl font-bold tracking-tight">ServiceBerg</span>
+                <span className="text-xl font-bold tracking-tighter text-black">Partner</span>
               </div>
             )}
             <button 
@@ -343,34 +343,34 @@ export const ProviderDashboard: React.FC<ProviderDashboardProps> = ({ provider, 
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id as any)}
-                className={`w-full flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-bold transition-all ${
+                className={`w-full flex items-center gap-4 px-4 py-4 rounded-2xl transition-all group ${
                   activeTab === item.id 
-                    ? 'bg-ink text-white shadow-xl shadow-ink/10' 
-                    : 'text-ink/40 hover:bg-smoke hover:text-ink'
+                    ? 'bg-black text-white shadow-xl shadow-black/10' 
+                    : 'text-ink/40 hover:bg-pearl hover:text-black'
                 } ${isCollapsed ? 'justify-center px-0' : ''}`}
                 title={isCollapsed ? item.label : ''}
               >
-                <item.icon size={20} />
-                {!isCollapsed && <span>{item.label}</span>}
+                <item.icon size={22} className={activeTab === item.id ? 'text-white' : 'group-hover:text-black'} />
+                {!isCollapsed && <span className="font-bold text-sm tracking-tight">{item.label}</span>}
               </button>
             ))}
           </nav>
 
-          <div className="mt-auto space-y-2">
+          <div className="mt-auto space-y-2 pb-8">
             <button 
-              className={`w-full flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-bold text-ink/40 hover:bg-smoke hover:text-ink transition-all ${isCollapsed ? 'justify-center px-0' : ''}`}
+              className={`w-full flex items-center gap-4 px-4 py-4 rounded-2xl text-ink/40 hover:bg-pearl hover:text-black transition-all ${isCollapsed ? 'justify-center px-0' : ''}`}
               title={isCollapsed ? 'Support' : ''}
             >
-              <HelpCircle size={20} />
-              {!isCollapsed && <span>Support</span>}
+              <HelpCircle size={22} />
+              {!isCollapsed && <span className="font-bold text-sm tracking-tight">Support</span>}
             </button>
             <button 
               onClick={onBack}
-              className={`w-full flex items-center gap-4 px-4 py-3 rounded-2xl text-sm font-bold text-red-500 hover:bg-red-50 transition-all ${isCollapsed ? 'justify-center px-0' : ''}`}
+              className={`w-full flex items-center gap-4 px-4 py-4 rounded-2xl text-red-500 hover:bg-red-50 transition-all ${isCollapsed ? 'justify-center px-0' : ''}`}
               title={isCollapsed ? 'Exit Dashboard' : ''}
             >
-              <LogOut size={20} />
-              {!isCollapsed && <span>Exit Dashboard</span>}
+              <LogOut size={22} />
+              {!isCollapsed && <span className="font-bold text-sm tracking-tight">Exit Dashboard</span>}
             </button>
           </div>
         </div>
@@ -417,14 +417,14 @@ export const ProviderDashboard: React.FC<ProviderDashboardProps> = ({ provider, 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {[
-                    { label: 'Total Revenue', value: `₹${stats.totalRevenue.toLocaleString()}`, icon: DollarSign, color: 'text-blue-600', bg: 'bg-blue-50', trend: '+12.5%' },
-                    { label: 'Total Orders', value: stats.totalOrders, icon: ShoppingBag, color: 'text-purple-600', bg: 'bg-purple-50', trend: '+8.2%' },
-                    { label: 'Avg. Order', value: `₹${stats.avgOrderValue}`, icon: TrendingUp, color: 'text-emerald-600', bg: 'bg-emerald-50', trend: '+4.1%' },
-                    { label: 'Active Customers', value: '1,284', icon: Users, color: 'text-orange-600', bg: 'bg-orange-50', trend: '+15.3%' },
+                    { label: 'Total Revenue', value: `₹${stats.totalRevenue.toLocaleString()}`, icon: DollarSign, color: 'text-black', bg: 'bg-gray-100', trend: '+12.5%' },
+                    { label: 'Total Orders', value: stats.totalOrders, icon: ShoppingBag, color: 'text-black', bg: 'bg-gray-100', trend: '+8.2%' },
+                    { label: 'Avg. Order', value: `₹${stats.avgOrderValue}`, icon: TrendingUp, color: 'text-black', bg: 'bg-gray-100', trend: '+4.1%' },
+                    { label: 'Active Customers', value: '1,284', icon: Users, color: 'text-black', bg: 'bg-gray-100', trend: '+15.3%' },
                   ].map((stat, i) => (
                     <div 
                       key={i} 
-                      className="bg-white p-6 rounded-[32px] border border-smoke shadow-sm hover:shadow-xl hover:border-ink/5 transition-all group cursor-default"
+                      className="bg-white p-6 rounded-[32px] border border-smoke shadow-sm hover:shadow-xl hover:border-black/5 transition-all group cursor-default"
                     >
                       <div className="flex items-center justify-between mb-4">
                         <div className={`h-12 w-12 rounded-2xl ${stat.bg} ${stat.color} flex items-center justify-center shadow-inner`}>
@@ -435,7 +435,7 @@ export const ProviderDashboard: React.FC<ProviderDashboardProps> = ({ provider, 
                           <span className="text-[8px] font-medium text-ink/20">vs last month</span>
                         </div>
                       </div>
-                      <div className="text-3xl font-bold tracking-tight mb-1">{stat.value}</div>
+                      <div className="text-3xl font-bold tracking-tight mb-1 text-black">{stat.value}</div>
                       <div className="text-sm font-medium text-ink/40">{stat.label}</div>
                     </div>
                   ))}

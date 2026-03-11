@@ -4,7 +4,7 @@ import { Zap, MapPin, Search, ChevronDown, ChevronLeft, Settings, Briefcase } fr
 interface NavbarProps {
   location: string;
   onLocationClick: () => void;
-  onNavigate: (view: 'home' | 'category' | 'provider' | 'jobs' | 'admin', categoryId?: string | null, providerId?: string | null) => void;
+  onNavigate: (view: 'home' | 'category' | 'provider' | 'jobs' | 'admin' | 'auth', categoryId?: string | null, providerId?: string | null, authMode?: 'login' | 'signup' | 'partner') => void;
   currentView: string;
 }
 
@@ -47,6 +47,21 @@ export const Navbar: React.FC<NavbarProps> = ({ location, onLocationClick, onNav
               <ChevronLeft size={16} /> Back
             </button>
           )}
+
+          <div className="hidden md:flex items-center gap-2 mr-2">
+            <button 
+              onClick={() => onNavigate('auth', null, null, 'login')}
+              className="px-4 py-2.5 rounded-xl text-sm font-bold text-ink hover:bg-pearl transition-all"
+            >
+              Log in
+            </button>
+            <button 
+              onClick={() => onNavigate('auth', null, null, 'signup')}
+              className="px-5 py-2.5 rounded-xl text-sm font-bold bg-ink text-white hover:bg-ink/90 transition-all shadow-lg shadow-ink/10"
+            >
+              Sign up
+            </button>
+          </div>
           
           <button 
             onClick={() => onNavigate('admin')}
